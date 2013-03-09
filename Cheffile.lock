@@ -18,6 +18,8 @@ SITE
       windows (>= 0.0.0)
       yum (>= 0.0.0)
     lvm (0.8.6)
+    mongodb (0.11.0)
+      apt (>= 0.0.0)
     mysql (2.1.2)
       build-essential (>= 0.0.0)
       openssl (>= 0.0.0)
@@ -71,6 +73,7 @@ PATH
 DEPENDENCIES
   apt (>= 0)
   libvirt (>= 0)
+  mongodb (>= 0)
   ntp (>= 0)
   skveez_database (>= 0)
   skveez_host (>= 0)
