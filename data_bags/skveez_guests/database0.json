@@ -1,0 +1,10 @@
+{
+  "id": "database0",
+  "memory": 4194304,
+  "disk_size": "32G",
+  "ip": "192.168.122.10",
+  "mac": "52:54:00:b3:68:10",
+  "vnc_port": 5910,
+  "ssh_port": 2210,
+  "action": "create"
+}

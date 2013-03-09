@@ -157,3 +157,22 @@ root@host0 ~ # virsh start ubuntu-12.10-server-i386
 root@host0 ~ # virsh shutdown ubuntu-12.10-server-i386
 root@host0 ~ # exit
 ```
+
+## Создание виртуальных машин
+
+Для создания виртуальных машин загрузите информацию о них на сервер Chef и
+запустите клиент Chef на сервере:
+
+```shell
+$ knife data bag from file skveez_guests data_bags/skveez_guests/*
+$ knife ssh name:host0.skveez.net sudo chef-client
+```
+
+## Настройка виртуальных машин
+
+Произведите настройку этих виртуальных машин используя пароль который вы вводили
+при установке Ubuntu на шаге создания образа диска:
+
+```shell
+$ knife bootstrap 144.76.8.196 -N database0.host0.skveez.net -p 2210 -x ubuntu --sudo -r "role[skveez_database]"
+```

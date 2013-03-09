@@ -9,6 +9,6 @@ end
 
 cookbook "libvirt", :github => "rithis/cookbook-libvirt"
 
-%w{ host }.each do |suffix|
+%w{ database host }.each do |suffix|
   cookbook "skveez_#{suffix}", :path => "skveez/#{suffix}"
 end
