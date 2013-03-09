@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site "http://community.opscode.com/api/v1"
+
+%w{ apt ntp ubuntu vslinko }.each do |cb|
+  cookbook cb
+end
+
+cookbook "libvirt", :github => "rithis/cookbook-libvirt"
+
+%w{ host }.each do |suffix|
+  cookbook "skveez_#{suffix}", :path => "skveez/#{suffix}"
+end

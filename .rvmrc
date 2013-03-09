@@ -1,0 +1,9 @@
+rvm --create gemset use @chef
+
+update_cookbook() {
+  DIR=$1
+  COOKBOOK=skveez_$1
+  rm -rf cookbooks/$COOKBOOK
+  cp -r skveez/$DIR cookbooks/$COOKBOOK
+  knife cookbook upload $COOKBOOK -o cookbooks
+}

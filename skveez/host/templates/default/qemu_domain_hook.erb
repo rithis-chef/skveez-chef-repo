@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "${1}" = "stopped" -o "${1}" = "reconnect" ]; then
+  iptables -t nat -D PREROUTING -p tcp -i eth0 --dport <%= @port %> -j DNAT --to-destination <%= @ip %>:22
+  iptables -D FORWARD -p tcp -d <%= @ip %> --dport 22 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+fi
+
+if [ "${1}" = "start" -o "${1}" = "reconnect" ]; then
+  iptables -t nat -A PREROUTING -p tcp -i eth0 --dport <%= @port %> -j DNAT --to-destination <%= @ip %>:22
+  iptables -I FORWARD -p tcp -d <%= @ip %> --dport 22 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+fi

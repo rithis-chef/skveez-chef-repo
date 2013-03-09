@@ -1,0 +1,17 @@
+upstream skveez {
+  <% @application_nodes.each do |application_node| %>
+  server <%= application_node["ipaddress"] %>;
+  <% end %>
+}
+
+server {
+  listen 80;
+  server_name skveez.com;
+
+  location / {
+    proxy_pass http://skveez/;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Real-Port $remote_port;
+  }
+}

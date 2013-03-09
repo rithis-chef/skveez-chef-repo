@@ -1,0 +1,8 @@
+#!/bin/sh
+
+DIR="$(dirname $0)"
+GUEST_HOOK="$DIR/qemu-$1"
+
+if [ -x "$GUEST_HOOK" ]; then
+  "$GUEST_HOOK" $2 $3 $4
+fi
