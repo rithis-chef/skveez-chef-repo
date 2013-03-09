@@ -1,0 +1,10 @@
+{
+  "id": "search0",
+  "memory": 2097152,
+  "disk_size": "16G",
+  "ip": "192.168.122.30",
+  "mac": "52:54:00:b3:68:30",
+  "vnc_port": 5930,
+  "ssh_port": 2230,
+  "action": "create"
+}

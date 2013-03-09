@@ -3,7 +3,7 @@
 
 site "http://community.opscode.com/api/v1"
 
-%w{ apt mongodb ntp ubuntu vslinko }.each do |cb|
+%w{ apt elasticsearch java mongodb ntp ubuntu vslinko }.each do |cb|
   cookbook cb
 end
 

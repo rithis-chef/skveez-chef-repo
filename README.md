@@ -176,4 +176,5 @@ $ knife ssh name:host0.skveez.net sudo chef-client
 ```shell
 $ knife bootstrap 144.76.8.196 -N database0.host0.skveez.net -p 2210 -x ubuntu --sudo -r "role[skveez_database]"
 $ knife bootstrap 144.76.8.196 -N sessions0.host0.skveez.net -p 2220 -x ubuntu --sudo -r "role[skveez_sessions]"
+$ knife bootstrap 144.76.8.196 -N search0.host0.skveez.net -p 2230 -x ubuntu --sudo -r "role[skveez_search]"
 ```
