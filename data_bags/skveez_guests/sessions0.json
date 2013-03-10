@@ -1,5 +1,7 @@
 {
   "id": "sessions0",
+  "host": "host0.skveez.net",
+  "name": "sessions0.host0.skveez.net",
   "memory": 2097152,
   "disk_size": "16G",
   "ip": "192.168.122.20",

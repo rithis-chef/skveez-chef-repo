@@ -1,5 +1,5 @@
 name    "skveez_host"
-version "0.0.1"
+version "0.0.2"
 
 %w{ libvirt lvm nginx }.each do |cb|
   depends cb

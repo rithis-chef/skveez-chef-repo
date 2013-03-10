@@ -233,3 +233,12 @@ $ knife ssh name:host0.skveez.net sudo chef-client
 
 После этого по адресу http://144.76.8.196/publications должен открываться
 сайт Skveez.
+
+## Обновление сайта
+
+При возникновении необходимости обновить исходные коды сайта из репозитория
+запустите следующую комманду:
+
+```shell
+$ knife ssh name:application0.host0.skveez.net "sudo chef-client" -a skveez_host_connection
+```

@@ -25,10 +25,14 @@ libvirt_domain node["skveez_host"]["template"]["name"] do
 end
 
 # guests
-guests = []
+guests = data_bag "skveez_guests"
 
-data_bag("skveez_guests").each do |name|
-  guests.push data_bag_item("skveez_guests", name)
+guests.map! do |id|
+  data_bag_item "skveez_guests", id
+end
+
+guests.select! do |guest|
+  guest["host"] == node.name
 end
 
 skveez_host_network "local" do

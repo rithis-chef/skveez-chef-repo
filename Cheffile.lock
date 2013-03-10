@@ -13,7 +13,7 @@ SITE
       postgresql (>= 1.0.0)
       xfs (>= 0.0.0)
     dmg (1.1.0)
-    elasticsearch (0.2.5)
+    elasticsearch (0.2.7)
       ark (>= 0.0.0)
     git (2.3.0)
       build-essential (>= 0.0.0)
@@ -21,7 +21,7 @@ SITE
       runit (~> 1.0)
       windows (>= 0.0.0)
       yum (>= 0.0.0)
-    java (1.9.6)
+    java (1.10.0)
       windows (>= 0.0.0)
     lvm (0.8.6)
     mongodb (0.11.0)
@@ -51,7 +51,7 @@ SITE
     sudo (2.0.4)
     ubuntu (1.1.2)
       apt (>= 0.0.0)
-    vslinko (0.0.0)
+    vslinko (0.0.2)
       git (>= 0.0.0)
       sudo (>= 0.0.0)
       zsh (>= 0.0.0)
@@ -66,9 +66,9 @@ SITE
 GIT
   remote: https://github.com/rithis/cookbook-libvirt
   ref: master
-  sha: 1afedecfa3d5b213cfe421429b0540b77dbb7f44
+  sha: 81959f08c5068d3a8e0b8c6acbb6b7a25afd522e
   specs:
-    libvirt (0.0.0)
+    libvirt (0.0.1)
 
 PATH
   remote: skveez/application
@@ -89,7 +89,7 @@ PATH
 PATH
   remote: skveez/host
   specs:
-    skveez_host (0.0.1)
+    skveez_host (0.0.2)
       libvirt (>= 0.0.0)
       lvm (>= 0.0.0)
       nginx (>= 0.0.0)

@@ -1,5 +1,7 @@
 {
   "id": "database0",
+  "host": "host0.skveez.net",
+  "name": "database0.host0.skveez.net",
   "memory": 4194304,
   "disk_size": "32G",
   "ip": "192.168.122.10",
