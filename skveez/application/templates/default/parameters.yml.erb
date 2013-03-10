@@ -1,0 +1,29 @@
+parameters:
+  secret: "<%= @application_settings["secret"] %>"
+
+  database_host: "<%= @database_node["ipaddress"] %>"
+  database_name: "<%= @database_node["skveez_database"]["database"] %>"
+  database_user: "<%= @database_node["skveez_database"]["username"] %>"
+  database_password: "<%= @database_node["skveez_database"]["password"] %>"
+
+  session_mongo_server: "mongodb://<%= @sessions_node["ipaddress"] %>"
+
+  elastica_host: "<%= @search_node["ipaddress"] %>"
+
+  facebook_client_id: "<%= @application_settings["facebook_client_id"] %>"
+  facebook_client_secret: "<%= @application_settings["facebook_client_secret"] %>"
+
+  vkontakte_client_id: "<%= @application_settings["vkontakte_client_id"] %>"
+  vkontakte_client_secret: "<%= @application_settings["vkontakte_client_secret"] %>"
+
+  twitter_client_id: "<%= @application_settings["twitter_client_id"] %>"
+  twitter_client_secret: "<%= @application_settings["twitter_client_secret"] %>"
+
+  recaptcha_public_key: "<%= @application_settings["recaptcha_public_key"] %>"
+  recaptcha_private_key: "<%= @application_settings["recaptcha_private_key"] %>"
+
+  mailer_transport: mail
+  mailer_user: ~
+  mailer_password: ~
+  
+  compass_bin: /usr/local/bin/compass

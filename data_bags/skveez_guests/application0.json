@@ -1,0 +1,10 @@
+{
+  "id": "application0",
+  "memory": 2097152,
+  "disk_size": "8G",
+  "ip": "192.168.122.40",
+  "mac": "52:54:00:b3:68:40",
+  "vnc_port": 5940,
+  "ssh_port": 2240,
+  "action": "create"
+}

@@ -116,6 +116,50 @@ $ knife role from file roles/*
 $ knife data bag create skveez_guests
 ```
 
+Создайте ключ для доступа к репозиторию проекта:
+
+```shell
+$ ssh-keygen -N '' -C '' -f deploy
+```
+
+Публичный ключ `deploy.pub` загрузите на GitHub [к вашим ключам][github].
+Содержимое приватного ключа `deploy` вместе с настройками приложения скопируйте
+в специальный data bag item используя следующую комманду:
+
+```shell
+$ knife data bag create skveez application
+```
+
+Во время запуска комманды откроется текстовый редактор для ввода настроек.
+Настройки приложения должны быть в формате JSON и содержать следующие поля:
+
+```json
+{
+  "id": "application",
+  "deploy_key": "",
+  "secret": "",
+  "facebook_client_id": "",
+  "facebook_client_secret": "",
+  "vkontakte_client_id": "",
+  "vkontakte_client_secret": "",
+  "twitter_client_id": "",
+  "twitter_client_secret": "",
+  "recaptcha_public_key": "",
+  "recaptcha_private_key": ""
+}
+```
+
+В приватном ключе вместо переводов строк должны быть символы `\n`. В поле
+`secret` должен быть случайный набор символов.
+
+Удалите ключи со своего компьютера:
+
+```shell
+$ rm deploy deploy.pub
+```
+
+[github]: https://github.com/rithis/skveez/settings/keys
+
 ## Настройка сервера
 
 Если вы используете Linux или OS X, то удалите запись о сервере из файла
@@ -177,4 +221,15 @@ $ knife ssh name:host0.skveez.net sudo chef-client
 $ knife bootstrap 144.76.8.196 -N database0.host0.skveez.net -p 2210 -x ubuntu --sudo -r "role[skveez_database]"
 $ knife bootstrap 144.76.8.196 -N sessions0.host0.skveez.net -p 2220 -x ubuntu --sudo -r "role[skveez_sessions]"
 $ knife bootstrap 144.76.8.196 -N search0.host0.skveez.net -p 2230 -x ubuntu --sudo -r "role[skveez_search]"
+$ knife bootstrap 144.76.8.196 -N application0.host0.skveez.net -p 2240 -x ubuntu --sudo -r "role[skveez_application]"
 ```
+
+Сообщите серверу о появлении новой виртуальной машины с ролью
+`skveez_application`:
+
+```shell
+$ knife ssh name:host0.skveez.net sudo chef-client
+```
+
+После этого по адресу http://144.76.8.196/publications должен открываться
+сайт Skveez.

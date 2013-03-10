@@ -1,0 +1,26 @@
+server {
+  listen 80;
+  server_name skveez.com;
+  root /var/www/current/web;
+  client_max_body_size <%= @max_upload_size %>m;
+
+  location / {
+    location ~ \.php$ {
+      fastcgi_pass unix:/var/run/php5-fpm.sock;
+      include fastcgi_params;
+      fastcgi_param REMOTE_ADDR $http_x_real_ip;
+      fastcgi_param REMOTE_PORT $http_x_real_port;
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    try_files $uri @backend;
+  }
+
+  location @backend {
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    include fastcgi_params;
+    fastcgi_param REMOTE_ADDR $http_x_real_ip;
+    fastcgi_param REMOTE_PORT $http_x_real_port;
+    fastcgi_param SCRIPT_FILENAME $document_root/app.php;
+  }
+}
