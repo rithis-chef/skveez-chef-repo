@@ -89,7 +89,7 @@ PATH
 PATH
   remote: skveez/host
   specs:
-    skveez_host (0.0.2)
+    skveez_host (0.0.3)
       libvirt (>= 0.0.0)
       lvm (>= 0.0.0)
       nginx (>= 0.0.0)
