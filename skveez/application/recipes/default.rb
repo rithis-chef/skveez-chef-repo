@@ -34,7 +34,7 @@ application "skveez" do
   repository "git@github.com:rithis/skveez.git"
   revision "master"
   deploy_key application_settings["deploy_key"]
-  environment "SYMFONY_ENV" => "prod"
+  environment "SYMFONY_ENV" => "prod", "HOME" => "/var/www"
   purge_before_symlink ["app/logs", "web/uploads"]
   symlinks(
     "logs" => "app/logs",
