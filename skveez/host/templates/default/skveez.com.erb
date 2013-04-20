@@ -12,6 +12,7 @@ server {
 server {
   listen 80;
   server_name skveez.com;
+  client_max_body_size <%= @max_upload_size %>m;
 
   location / {
     proxy_pass http://skveez/;

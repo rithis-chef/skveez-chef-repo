@@ -58,7 +58,10 @@ application_nodes = search(:node, "role:skveez_application")
 if application_nodes.length > 0
   template "#{node["nginx"]["dir"]}/sites-available/skveez.com" do
     source "skveez.com.erb"
-    variables :application_nodes => application_nodes
+    variables(
+      :application_nodes => application_nodes,
+      :max_upload_size => 100
+    )
     notifies :reload, "service[nginx]"
   end
 
