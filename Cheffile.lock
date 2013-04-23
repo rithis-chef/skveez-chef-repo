@@ -74,7 +74,7 @@ GIT
     libvirt (0.0.1)
 
 PATH
-  remote: skveez/application
+  remote: my_cookbooks/skveez_application
   specs:
     skveez_application (0.0.2)
       application (>= 0.0.0)
@@ -83,14 +83,14 @@ PATH
       php-fpm (>= 0.0.0)
 
 PATH
-  remote: skveez/database
+  remote: my_cookbooks/skveez_database
   specs:
     skveez_database (0.0.0)
       database (>= 0.0.0)
       mysql (>= 0.0.0)
 
 PATH
-  remote: skveez/host
+  remote: my_cookbooks/skveez_host
   specs:
     skveez_host (0.0.4)
       libvirt (>= 0.0.0)

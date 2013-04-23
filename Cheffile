@@ -10,5 +10,5 @@ end
 cookbook "libvirt", :git => "git://github.com/rithis-chef/cookbook-libvirt"
 
 %w{ application database host }.each do |suffix|
-  cookbook "skveez_#{suffix}", :path => "skveez/#{suffix}"
+  cookbook "skveez_#{suffix}", :path => "my_cookbooks/skveez_#{suffix}"
 end
