@@ -14,13 +14,13 @@ link "/etc/php5/conf.d/20-mongo.ini" do
   to "/etc/php5/mods-available/mongo.ini"
 end
 
-template "/etc/php5/fpm/pool.d/www.conf" do
+template "/etc/php5/fpm/pools/www.conf" do
   source "www.conf.erb"
   variables(
     :max_upload_size => node["skveez_application"]["max_upload_size"],
     :memory_limit => node["skveez_application"]["memory_limit"]
   )
-  notifies :restart, "service[php5-fpm]"
+  notifies :restart, "service[php-fpm]"
 end
 
 application_settings = data_bag_item("skveez", "application")

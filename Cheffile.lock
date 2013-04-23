@@ -58,7 +58,7 @@ SITE
       git (>= 0.0.0)
       sudo (>= 0.0.0)
       zsh (>= 0.0.0)
-    windows (1.8.8)
+    windows (1.8.10)
       chef_handler (>= 0.0.0)
     xfs (1.1.0)
     xml (1.1.2)
@@ -76,7 +76,7 @@ GIT
 PATH
   remote: skveez/application
   specs:
-    skveez_application (0.0.1)
+    skveez_application (0.0.2)
       application (>= 0.0.0)
       nginx (>= 0.0.0)
       php (>= 0.0.0)
