@@ -1,0 +1,24 @@
+#!/bin/sh
+
+. /usr/local/etc/mysql_backup.conf
+
+if mkdir $LOCKDIR 2>/dev/null; then
+    OUTPUT_LOG=`mktemp /tmp/mysql_backup_incremental.XXXXXX`
+    trap "rm -f $OUTPUT_LOG; rm -rf $LOCKDIR" 0 2 3 15 
+else
+    echo "Lockdir already exists" | mail -s "MySQL incremental backup failed @ `hostname`" $MAILTO_REPORTS
+    exit 1
+fi
+LATEST_FULL_BACKUP=`find $BACKUP_DIR_FULL -maxdepth 1 -mindepth 1 -type d `
+if [ "x$LATEST_FULL_BACKUP" = "x" ]; then
+    echo "Full backup not found" | mail -s "MySQL incremental backup failed @ `hostname`" $MAILTO_REPORTS
+fi
+innobackupex --user=$BACKUP_USER \
+             --password=$BACKUP_PASSWORD \
+             --incremental $BACKUP_DIR_INCR \
+             --incremental-basedir=$LATEST_FULL_BACKUP > $OUTPUT_LOG 2>&1
+grep -q "innobackupex: completed OK!" $OUTPUT_LOG
+if [ $? != 0 ]; then
+  cat $OUTPUT_LOG | mail -s "MySQL incremental backup failed @ `hostname`" $MAILTO_REPORTS
+fi
+

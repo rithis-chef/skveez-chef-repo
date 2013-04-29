@@ -1,0 +1,38 @@
+#!/bin/sh
+
+name="$1"
+keep_copies="$2"
+
+LOCKDIR=/tmp/`basename $0`.lock
+
+[ "$2" ] || exit 1
+
+[ $keep_copies -lt 0 ] && exit 0 # -1 is for "keep everything forever"
+
+if mkdir $LOCKDIR 2>/dev/null; then
+    OUTFILE=`mktemp /tmp/tarsnap_janitor.XXXXXX`
+    trap "rm -f $OUTFILE; rm -rf $LOCKDIR" 0 2 3 15 
+else
+    echo "Lockdir already exists"
+    exit 1
+fi
+
+OUTFILE=`mktemp /tmp/tarsnap_janitor.XXXXXX`
+
+gen_stored_list() {
+    LANG=C /usr/local/bin/tarsnap --list-archives \
+	| grep "^${name}_[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]_[0-9][0-9]-[0-9][0-9]$" \
+	| sort > $OUTFILE
+}
+
+gen_stored_list
+
+[ `wc -l $OUTFILE | awk '{print $1}'` -lt $keep_copies ] && exit 0
+
+while [ `wc -l $OUTFILE | awk '{print $1}'` -gt $keep_copies ]; do
+    to_remove=`head -1 $OUTFILE`
+    /usr/local/bin/tarsnap -df $to_remove && echo "Removed archive $to_remove"
+    gen_stored_list
+done
+
+rm -f $OUTFILE
