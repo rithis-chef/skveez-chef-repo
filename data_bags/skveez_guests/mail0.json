@@ -1,0 +1,12 @@
+{
+  "id": "mail0",
+  "host": "host0.skveez.net",
+  "name": "mail0.host0.skveez.net",
+  "memory": 1048576,
+  "disk_size": "8G",
+  "ip": "192.168.122.60",
+  "mac": "52:54:00:b3:68:60",
+  "vnc_port": 5960,
+  "ssh_port": 2260,
+  "action": "create"
+}

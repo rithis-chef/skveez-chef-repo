@@ -1,7 +1,7 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    application (2.0.0)
+    application (2.0.2)
     apt (1.9.2)
     ark (0.1.0)
     aws (0.100.6)
@@ -21,9 +21,9 @@ SITE
       runit (>= 1.0)
       windows (>= 0.0.0)
       yum (>= 0.0.0)
-    java (1.10.0)
+    java (1.10.2)
       windows (>= 0.0.0)
-    lvm (0.8.6)
+    lvm (0.8.8)
     mongodb (0.11.0)
       apt (>= 0.0.0)
     mysql (3.0.0)
@@ -44,6 +44,7 @@ SITE
     php-fpm (0.4.1)
       apt (>= 0.0.0)
       yum (>= 0.0.0)
+    postfix (2.1.4)
     postgresql (2.4.0)
       apt (>= 0.0.0)
       build-essential (>= 0.0.0)
@@ -76,7 +77,7 @@ GIT
 PATH
   remote: my_cookbooks/skveez_application
   specs:
-    skveez_application (0.0.2)
+    skveez_application (0.0.3)
       application (>= 0.0.0)
       nginx (>= 0.0.0)
       php (>= 0.0.0)
@@ -92,7 +93,7 @@ PATH
 PATH
   remote: my_cookbooks/skveez_host
   specs:
-    skveez_host (0.0.4)
+    skveez_host (0.0.5)
       libvirt (>= 0.0.0)
       lvm (>= 0.0.0)
       nginx (>= 0.0.0)
@@ -104,6 +105,7 @@ DEPENDENCIES
   libvirt (>= 0)
   mongodb (>= 0)
   ntp (>= 0)
+  postfix (>= 0)
   skveez_application (>= 0)
   skveez_database (>= 0)
   skveez_host (>= 0)

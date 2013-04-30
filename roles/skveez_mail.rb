@@ -1,16 +1,14 @@
-name "skveez_application"
+name "skveez_mail"
 
 run_list(
   "role[skveez_node]",
-  "recipe[skveez_application]",
-  "recipe[postfix::client]",
+  "recipe[postfix::server]",
   "recipe[skveez_host::guest]"
 )
 
 override_attributes(
   "postfix" => {
-    "relayhost_role" => "skveez_mail",
-    "mail_type" => "client",
+    "mail_relay_networks" => "192.168.122.0/24",
     "mydomain" => "skveez.com",
     "myorigin" => "skveez.com"
   }
