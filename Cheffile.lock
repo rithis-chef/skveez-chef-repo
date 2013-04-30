@@ -51,7 +51,7 @@ SITE
     runit (1.1.2)
       build-essential (>= 0.0.0)
       yum (>= 0.0.0)
-    sudo (2.0.4)
+    sudo (2.1.0)
     ubuntu (1.1.2)
       apt (>= 0.0.0)
     vslinko (0.0.2)

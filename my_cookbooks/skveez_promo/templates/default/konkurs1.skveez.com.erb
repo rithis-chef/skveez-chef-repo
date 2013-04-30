@@ -1,0 +1,38 @@
+server {
+  listen 80;
+  server_name konkurs1.skveez.com;
+  root /var/www/current;
+  client_max_body_size <%= @max_upload_size %>m;
+
+  location ~ \.php$ {
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    include fastcgi_params;
+    fastcgi_param REMOTE_ADDR $http_x_real_ip;
+    fastcgi_param REMOTE_PORT $http_x_real_port;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  }
+
+  location / {
+    try_files $uri @backend;
+  }
+
+  location @backend {
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    include fastcgi_params;
+    fastcgi_param REMOTE_ADDR $http_x_real_ip;
+    fastcgi_param REMOTE_PORT $http_x_real_port;
+    fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+  }
+
+  location /manager/ {
+    try_files $uri @manager_backend;
+  }
+
+  location @manager_backend {
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    include fastcgi_params;
+    fastcgi_param REMOTE_ADDR $http_x_real_ip;
+    fastcgi_param REMOTE_PORT $http_x_real_port;
+    fastcgi_param SCRIPT_FILENAME $document_root/manager/index.php;
+  }
+}

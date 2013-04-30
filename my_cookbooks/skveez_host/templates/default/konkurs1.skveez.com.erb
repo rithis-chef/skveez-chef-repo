@@ -1,0 +1,18 @@
+upstream skveez_promo {
+  <% @application_nodes.each do |application_node| %>
+  server <%= application_node["ipaddress"] %>;
+  <% end %>
+}
+
+server {
+  listen 80;
+  server_name konkurs1.skveez.com;
+  client_max_body_size <%= @max_upload_size %>m;
+
+  location / {
+    proxy_pass http://skveez_promo/;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Real-Port $remote_port;
+  }
+}

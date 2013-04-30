@@ -67,3 +67,18 @@ if application_nodes.length > 0
 
   nginx_site "skveez.com"
 end
+
+application_nodes = search(:node, "role:skveez_promo")
+
+if application_nodes.length > 0
+  template "#{node["nginx"]["dir"]}/sites-available/konkurs1.skveez.com" do
+    source "konkurs1.skveez.com.erb"
+    variables(
+      :application_nodes => application_nodes,
+      :max_upload_size => 10
+    )
+    notifies :reload, "service[nginx]"
+  end
+
+  nginx_site "konkurs1.skveez.com"
+end
