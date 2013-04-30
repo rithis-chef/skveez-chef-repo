@@ -70,7 +70,7 @@ application "skveez" do
     end
   end
 
-  action ::File.exists?("/var/www/current") ? :deploy : :force_deploy
+  action :force_deploy
 end
 
 

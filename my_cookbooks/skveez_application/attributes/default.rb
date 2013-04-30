@@ -13,3 +13,6 @@ override["php"]["packages"] = default["php"]["packages"] + %w{
 }
 
 override["nginx"]["default_site_enabled"] = false
+
+override["php-fpm"]["pools"] = []
+override["php-fpm"]["pool"] = {}
