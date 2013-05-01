@@ -22,17 +22,10 @@ server {
     fastcgi_param REMOTE_ADDR $http_x_real_ip;
     fastcgi_param REMOTE_PORT $http_x_real_port;
     fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+    fastcgi_param QUERY_STRING $query_string&q=$request_uri;
   }
 
   location /manager/ {
-    try_files $uri @manager_backend;
-  }
-
-  location @manager_backend {
-    fastcgi_pass unix:/var/run/php5-fpm.sock;
-    include fastcgi_params;
-    fastcgi_param REMOTE_ADDR $http_x_real_ip;
-    fastcgi_param REMOTE_PORT $http_x_real_port;
-    fastcgi_param SCRIPT_FILENAME $document_root/manager/index.php;
+    index index.php;
   }
 }

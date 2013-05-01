@@ -98,6 +98,17 @@ PATH
       lvm (>= 0.0.0)
       nginx (>= 0.0.0)
 
+PATH
+  remote: my_cookbooks/skveez_promo
+  specs:
+    skveez_promo (0.0.1)
+      application (>= 0.0.0)
+      database (>= 0.0.0)
+      mysql (>= 0.0.0)
+      nginx (>= 0.0.0)
+      php (>= 0.0.0)
+      php-fpm (>= 0.0.0)
+
 DEPENDENCIES
   apt (>= 0)
   elasticsearch (>= 0)
@@ -109,6 +120,7 @@ DEPENDENCIES
   skveez_application (>= 0)
   skveez_database (>= 0)
   skveez_host (>= 0)
+  skveez_promo (>= 0)
   ubuntu (>= 0)
   vslinko (>= 0)
 
