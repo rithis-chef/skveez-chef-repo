@@ -31,10 +31,10 @@ cookbook_file "#{Chef::Config[:file_cache_path]}/sampledatabase.sql"
 
 mysql_database "classicmodels" do
   connection({
-               :host     => "localhost",
-               :username => "root",
-               :password => node['mysql']['server_root_password']
-             })
+    :host     => "localhost",
+    :username => "root",
+    :password => node['mysql']['server_root_password']
+  })
   sql { ::File.open("#{Chef::Config[:file_cache_path]}/sampledatabase.sql").read }
   action :create
 end

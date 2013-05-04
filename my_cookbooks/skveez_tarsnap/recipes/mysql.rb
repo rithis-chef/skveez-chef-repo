@@ -32,14 +32,14 @@ end
 template "/usr/local/etc/mysql_backup.conf"
 
 tarsnap_archive "MySQL full backup" do
-  pathnames   [ "#{node['tarsnap']['temp_dir']}/mysql/full" ]
-  before_run  "/usr/local/bin/mysql_backup_full"
+  pathnames  [ "#{node['tarsnap']['temp_dir']}/mysql/full" ]
+  before_run "/usr/local/bin/mysql_backup_full"
 
-  minute      node['tarsnap']['backup_mysql_full']['schedule'].split[0]
-  hour        node['tarsnap']['backup_mysql_full']['schedule'].split[1]
-  day         node['tarsnap']['backup_mysql_full']['schedule'].split[2]
-  month       node['tarsnap']['backup_mysql_full']['schedule'].split[3]
-  weekday     node['tarsnap']['backup_mysql_full']['schedule'].split[4]
+  minute  node['tarsnap']['backup_mysql_full']['schedule'].split[0]
+  hour    node['tarsnap']['backup_mysql_full']['schedule'].split[1]
+  day     node['tarsnap']['backup_mysql_full']['schedule'].split[2]
+  month   node['tarsnap']['backup_mysql_full']['schedule'].split[3]
+  weekday node['tarsnap']['backup_mysql_full']['schedule'].split[4]
 
   keep_copies node['tarsnap']['backup_mysql_full']['keep_copies']
 end
@@ -48,11 +48,11 @@ tarsnap_archive "MySQL incremental backup" do
   pathnames  [ "#{node['tarsnap']['temp_dir']}/mysql/incr" ]
   before_run "/usr/local/bin/mysql_backup_incremental"
 
-  minute     node['tarsnap']['backup_mysql_incremental']['schedule'].split[0]
-  hour       node['tarsnap']['backup_mysql_incremental']['schedule'].split[1]
-  day        node['tarsnap']['backup_mysql_incremental']['schedule'].split[2]
-  month      node['tarsnap']['backup_mysql_incremental']['schedule'].split[3]
-  weekday    node['tarsnap']['backup_mysql_incremental']['schedule'].split[4]
+  minute  node['tarsnap']['backup_mysql_incremental']['schedule'].split[0]
+  hour    node['tarsnap']['backup_mysql_incremental']['schedule'].split[1]
+  day     node['tarsnap']['backup_mysql_incremental']['schedule'].split[2]
+  month   node['tarsnap']['backup_mysql_incremental']['schedule'].split[3]
+  weekday node['tarsnap']['backup_mysql_incremental']['schedule'].split[4]
 
   keep_copies node['tarsnap']['backup_mysql_incremental']['keep_copies']
 end

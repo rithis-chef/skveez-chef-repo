@@ -1,8 +1,11 @@
 #!/bin/sh
 
+unlock() {
+    mongo admin --eval "printjson(db.fsyncUnlock())"
+}
+
+rm -rf <%= node['tarsnap']['temp_dir'] %>/mongodb/*
 mongo admin --eval "printjson(db.fsyncLock())"
-
+trap unlock 2 3 15 
 mongodump --out <%= node['tarsnap']['temp_dir'] %>/mongodb/mongodump-`date '+%Y-%m-%d_%H-%M'`
-
-mongo admin --eval "printjson(db.fsyncUnlock())"
-
+unlock
