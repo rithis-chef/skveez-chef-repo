@@ -11,10 +11,10 @@ guests.map! do |id|
 end
 
 guests.select! do |guest|
-  guest["name"] == node.name
+  guest['name'] == node.name
 end
 
 guest = guests.first
 
-host_node = search(:node, "name:#{guest["host"]}").first
-node.set["skveez_host_connection"] = "#{host_node["ipaddress"]}:#{guest["ssh_port"]}"
+host_node = search(:node, "name:#{guest['host']}").first
+node.set['skveez_host_connection'] = "#{host_node['ipaddress']}:#{guest['ssh_port']}"

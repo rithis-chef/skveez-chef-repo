@@ -17,8 +17,8 @@ end
 template "/etc/php5/fpm/pools/www.conf" do
   source "www.conf.erb"
   variables(
-    :max_upload_size => node["skveez_application"]["max_upload_size"],
-    :memory_limit => node["skveez_application"]["memory_limit"]
+    :max_upload_size => node['skveez_application']['max_upload_size'],
+    :memory_limit => node['skveez_application']['memory_limit']
   )
   notifies :restart, "service[php-fpm]"
 end
@@ -33,9 +33,9 @@ application "skveez" do
   owner "www-data"
   repository "git@github.com:rithis/skveez.git"
   revision "master"
-  deploy_key application_settings["deploy_key"]
+  deploy_key application_settings['deploy_key']
   environment "SYMFONY_ENV" => "prod", "HOME" => "/var/www"
-  purge_before_symlink ["app/logs", "web/uploads"]
+  purge_before_symlink ['app/logs", "web/uploads']
   symlinks(
     "logs" => "app/logs",
     "uploads" => "web/uploads"
@@ -74,9 +74,9 @@ application "skveez" do
 end
 
 
-template "#{node["nginx"]["dir"]}/sites-available/skveez.com" do
+template "#{node['nginx']['dir']}/sites-available/skveez.com" do
   source "skveez.com.erb"
-  variables :max_upload_size => node["skveez_application"]["max_upload_size"]
+  variables :max_upload_size => node['skveez_application']['max_upload_size']
   notifies :reload, "service[nginx]"
 end
 

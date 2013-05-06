@@ -3,16 +3,16 @@ action :redefine do
   dhcp_hosts = []
 
   new_resource.guests.each do |guest|
-    if guest["action"] == "create"
+    if guest['action'] == "create"
       dns_hosts.push(
-        "ip" => guest["ip"],
-        "hostname" => guest["id"]
+        "ip" => guest['ip'],
+        "hostname" => guest['id']
       )
 
       dhcp_hosts.push(
-        "ip" => guest["ip"],
-        "mac" => guest["mac"],
-        "name" => "#{guest["id"]}.#{new_resource.domain}"
+        "ip" => guest['ip'],
+        "mac" => guest['mac'],
+        "name" => "#{guest['id']}.#{new_resource.domain}"
       )
     end
   end

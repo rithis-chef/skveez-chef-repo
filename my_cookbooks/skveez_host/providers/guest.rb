@@ -1,5 +1,5 @@
 action :create do
-  vg  = node["skveez_host"]["guest"]["lvm_vg"]
+  vg  = node['skveez_host']['guest']['lvm_vg']
   dev = "/dev/#{vg}/#{new_resource.name}"
 
   lvm_logical_volume new_resource.name do
@@ -40,7 +40,7 @@ action :create do
 end
 
 action :delete do
-  vg  = node["skveez_host"]["guest"]["lvm_vg"]
+  vg  = node['skveez_host']['guest']['lvm_vg']
   dev = "/dev/#{vg}/#{new_resource.name}"
 
   libvirt_domain new_resource.name do
