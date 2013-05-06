@@ -1,0 +1,6 @@
+BACKUP_USER="<%= node['tarsnap']['mysql_login'] %>"
+BACKUP_PASSWORD="<%= node['tarsnap']['mysql_password'] %>"
+BACKUP_DIR_FULL="<%= node['tarsnap']['temp_dir'] %>/mysql/full"
+BACKUP_DIR_INCR="<%= node['tarsnap']['temp_dir'] %>/mysql/incr"
+MAILTO_REPORTS="<%= node['tarsnap']['mailto_reports'] %>"
+LOCKDIR="/tmp/`basename $0`.lock"
