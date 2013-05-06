@@ -145,7 +145,8 @@ $ knife data bag create skveez application
   "twitter_client_id": "",
   "twitter_client_secret": "",
   "recaptcha_public_key": "",
-  "recaptcha_private_key": ""
+  "recaptcha_private_key": "",
+  "no_reply_password": ""
 }
 ```
 
