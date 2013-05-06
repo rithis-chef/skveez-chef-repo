@@ -23,4 +23,3 @@ default['tarsnap']['backup_mysql_full']['schedule']    = "0 3 * * 7"
 
 default['tarsnap']['backup_mongodb']['keep_copies'] = 7
 default['tarsnap']['backup_mongodb']['schedule']    = "0 3 * * 7"
-

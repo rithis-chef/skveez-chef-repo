@@ -21,4 +21,3 @@ grep -q "innobackupex: completed OK!" $OUTPUT_LOG
 if [ $? != 0 ]; then
   cat $OUTPUT_LOG | mail -s "MySQL incremental backup failed @ `hostname`" $MAILTO_REPORTS
 fi
-
