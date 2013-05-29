@@ -3,7 +3,6 @@ SITE
   specs:
     application (2.0.4)
     apt (1.10.0)
-    ark (0.2.2)
     aws (0.101.0)
     build-essential (1.4.0)
     chef_handler (1.1.4)
@@ -69,6 +68,13 @@ SITE
     zsh (1.0.0)
 
 GIT
+  remote: git://github.com/RallySoftware-cookbooks/ark
+  ref: COOK-3065
+  sha: 0ddcd485f45840480960430218bfa6b60f341bd2
+  specs:
+    ark (0.2.3)
+
+GIT
   remote: git://github.com/rithis-chef/cookbook-libvirt
   ref: master
   sha: 81959f08c5068d3a8e0b8c6acbb6b7a25afd522e
@@ -85,7 +91,7 @@ GIT
 PATH
   remote: my_cookbooks/skveez_application
   specs:
-    skveez_application (0.1.2)
+    skveez_application (0.1.1)
       application (>= 0.0.0)
       nginx (>= 0.0.0)
       php (>= 0.0.0)
@@ -130,6 +136,7 @@ PATH
 
 DEPENDENCIES
   apt (>= 0)
+  ark (>= 0)
   elasticsearch (>= 0)
   ignis (>= 0)
   java (>= 0)
