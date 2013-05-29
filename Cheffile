@@ -8,6 +8,7 @@ site "http://community.opscode.com/api/v1"
 end
 
 cookbook "libvirt", :git => "git://github.com/rithis-chef/cookbook-libvirt"
+cookbook "ignis", :git => "git://github.com/vivus-ignis/cookbook-ignis"
 
 %w{ application database tarsnap host promo }.each do |suffix|
   cookbook "skveez_#{suffix}", :path => "my_cookbooks/skveez_#{suffix}"

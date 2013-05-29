@@ -3,7 +3,8 @@ name "skveez_node"
 run_list(
   "recipe[ubuntu]",
   "recipe[apt]",
-  "recipe[vslinko]"
+  "recipe[vslinko]",
+  "recipe[ignis]"
 )
 
 override_attributes(
