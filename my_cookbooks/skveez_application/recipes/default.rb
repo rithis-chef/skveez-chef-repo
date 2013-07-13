@@ -45,6 +45,11 @@ application "skveez" do
   )
   migrate true
   migration_command "./migration.sh"
+  restart_command do
+    service "php-fpm" do
+      action :restart
+    end
+  end
 
   before_migrate do
     template "/var/www/shared/parameters.yml" do
