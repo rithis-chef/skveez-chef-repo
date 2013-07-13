@@ -1,7 +1,7 @@
 include_attribute "php"
 
 default['skveez_application']['max_upload_size'] = 100
-default['skveez_application']['memory_limit'] = 32768
+default['skveez_application']['memory_limit'] = 163840
 
 override['php']['packages'] = default['php']['packages'] + %w{
   php-apc
