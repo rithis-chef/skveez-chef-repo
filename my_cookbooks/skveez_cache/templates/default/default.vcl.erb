@@ -1,0 +1,85 @@
+director default round-robin {
+<% node["application_nodes"].each do |application_node| %>
+  {
+    .backend = {
+      .host = "<%= application_node %>";
+    }
+  }
+<% end %>
+}
+
+sub vcl_recv {
+  # Remove arguments from req.url
+  set req.http.X-Cache-Hash-Url = regsub(req.url, "^([^?]+).*$", "\1");
+  set req.http.X-User-Id = regsub(req.http.Cookie, "^.*userid=([^;]+);?.*$", "\1");
+
+  if (req.request == "POST" && (req.url == "/profile/following" || req.url == "/profile/following/delete")) {
+    ban("obj.http.X-Cache-Hash-Url ~ ^/profiles/ && obj.http.X-Cache-Hash-User-Id == " + req.http.X-User-Id);
+  }
+
+  if ((req.request == "POST" && (req.url == "/profile" || req.url == "/profile/compstart")) || (req.request == "GET" && req.url ~ "^/profile/connect/.+/success$")) {
+    ban("obj.http.X-Cache-Hash-Url == /profile && obj.http.X-Cache-Hash-User-Id == " + req.http.X-User-Id);
+  }
+
+  if (req.request != "GET" && req.request != "HEAD") {
+    return (pass);
+  }
+
+  # GET /
+  if (req.url ~ "^/(\?.*)?$") {
+    return (lookup);
+  }
+
+  # GET /publications
+  if (req.url ~ "^/publications(\?.*)?$") {
+    return (lookup);
+  }
+
+  # GET /profile
+  # User-dependent
+  if (req.url ~ "^/profile(\?.*)?$") {
+    set req.http.X-Cache-Hash-User-Id = req.http.X-User-Id;
+    return (lookup);
+  }
+
+  # GET /profiles/{id}
+  # User-dependent
+  if (req.url ~ "^/profiles/\d+(\?.*)?$") {
+    set req.http.X-Cache-Hash-User-Id = req.http.X-User-Id;
+    return (lookup);
+  }
+
+  # GET /_userplace
+  # Anonymous-only
+  if (req.url == "/_userplace" && req.http.Cookie !~ "userid") {
+    return (lookup);
+  }
+
+  return (pass);
+}
+
+sub vcl_hash {
+  hash_data(req.http.X-Cache-Hash-Url);
+
+  if (req.http.X-Cache-Hash-User-Id) {
+    hash_data(req.http.X-Cache-Hash-User-Id);
+  }
+
+  return (hash);
+}
+
+sub vcl_fetch {
+  if (beresp.http.Content-Type ~ "html") {
+    set beresp.do_esi = true;
+  }
+
+  set beresp.http.X-Cache-Hash-Url = req.http.X-Cache-Hash-Url;
+  set beresp.http.X-Cache-Hash-User-Id = req.http.X-Cache-Hash-User-Id;
+
+  return (deliver);
+}
+
+sub vcl_deliver {
+  unset resp.http.X-Cache-Hash-Url;
+  unset resp.http.X-Cache-Hash-User-Id;
+}

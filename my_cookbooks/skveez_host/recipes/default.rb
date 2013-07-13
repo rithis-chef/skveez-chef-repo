@@ -54,11 +54,14 @@ end
 
 # application
 application_nodes = search(:node, "role:skveez_application")
+cache_nodes = search(:node, "role:skveez_cache")
+promo_nodes = search(:node, "role:skveez_promo")
 
-if application_nodes.length > 0
+if cache_nodes.length > 0
   template "#{node['nginx']['dir']}/sites-available/skveez.com" do
     source "skveez.com.erb"
     variables(
+      :cache_nodes => cache_nodes,
       :application_nodes => application_nodes,
       :max_upload_size => 100
     )
@@ -68,13 +71,11 @@ if application_nodes.length > 0
   nginx_site "skveez.com"
 end
 
-application_nodes = search(:node, "role:skveez_promo")
-
-if application_nodes.length > 0
+if promo_nodes.length > 0
   template "#{node['nginx']['dir']}/sites-available/konkurs1.skveez.com" do
     source "konkurs1.skveez.com.erb"
     variables(
-      :application_nodes => application_nodes,
+      :application_nodes => promo_nodes,
       :max_upload_size => 10
     )
     notifies :reload, "service[nginx]"

@@ -1,8 +1,17 @@
-upstream skveez {
+upstream skveez_cache {
+  <% @cache_nodes.each do |cache_node| %>
+  server <%= cache_node["ipaddress"] %>;
+  <% end %>
+}
+
+upstream skveez_application {
   <% @application_nodes.each do |application_node| %>
   server <%= application_node["ipaddress"] %>;
   <% end %>
 }
+
+proxy_cache_path /var/lib/nginx/cache/assets keys_zone=skveez_assets:1m inactive=1m max_size=1024m;
+proxy_cache_path /var/lib/nginx/cache/uploads keys_zone=skveez_uploads:100m inactive=60m max_size=30720m;
 
 server {
   listen 80 default;
@@ -13,14 +22,37 @@ server {
   listen 80;
   server_name skveez.com;
   client_max_body_size <%= @max_upload_size %>m;
+  proxy_temp_path /var/lib/nginx/cache/tmp;
 
   location / {
     root /home/vyacheslav;
     try_files /maintenance.html @backend;
   }
 
+<% %w{ /assetic/ /bundles/ /images/ /stylesheets/ /swf/ /favicon.ico }.each do |assets_url| %>
+  location <%= assets_url %> {
+    proxy_pass http://skveez_application;
+    proxy_cache skveez_assets;
+    proxy_cache_valid 200 1m;
+  }
+<% end %>
+
+<% %w{ poll product publication store }.each do |upload_type| %>
+  location /uploads/<%= upload_type %>/ {
+    proxy_pass http://skveez_application;
+    proxy_cache skveez_uploads;
+    proxy_cache_valid 200 60m;
+  }
+<% end %>
+
+<% %w{ user movies }.each do |upload_type| %>
+  location /uploads/<%= upload_type %>/ {
+    proxy_pass http://skveez_application;
+  }
+<% end %>
+
   location @backend {
-    proxy_pass http://skveez;
+    proxy_pass http://skveez_cache;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Real-Port $remote_port;

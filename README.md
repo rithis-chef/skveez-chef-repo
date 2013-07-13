@@ -225,6 +225,7 @@ $ knife bootstrap 144.76.8.196 -N search0.host0.skveez.net -p 2230 -x ubuntu --s
 $ knife bootstrap 144.76.8.196 -N application0.host0.skveez.net -p 2240 -x ubuntu --sudo -r "role[skveez_application]"
 $ knife bootstrap 144.76.8.196 -N promo0.host0.skveez.net -p 2250 -x ubuntu --sudo -r "role[skveez_promo]"
 $ knife bootstrap 144.76.8.196 -N mail0.host0.skveez.net -p 2260 -x ubuntu --sudo -r "role[skveez_mail]"
+$ knife bootstrap 144.76.8.196 -N cache0.host0.skveez.net -p 2270 -x ubuntu --sudo -r "role[skveez_cache]"
 ```
 
 Сообщите серверу о появлении новой виртуальной машины с ролью
