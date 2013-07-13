@@ -15,7 +15,11 @@ server {
   client_max_body_size <%= @max_upload_size %>m;
 
   location / {
-    proxy_pass http://skveez/;
+    try_files /home/vyacheslav/maintenance.html @backend;
+  }
+
+  location @backend {
+    proxy_pass http://skveez;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Real-Port $remote_port;
