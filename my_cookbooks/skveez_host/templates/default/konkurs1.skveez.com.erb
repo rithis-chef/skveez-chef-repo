@@ -16,3 +16,10 @@ server {
     proxy_set_header X-Real-Port $remote_port;
   }
 }
+
+server {
+  listen 80;
+  server_name konkurs2.skveez.com;
+  root /home/vyacheslav/Skveez_2;
+  charset cp1251;
+}
