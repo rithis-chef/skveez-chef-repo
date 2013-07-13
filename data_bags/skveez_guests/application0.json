@@ -2,7 +2,7 @@
   "id": "application0",
   "host": "host0.skveez.net",
   "name": "application0.host0.skveez.net",
-  "memory": 2097152,
+  "memory": 8388608,
   "disk_size": "64G",
   "ip": "192.168.122.40",
   "mac": "52:54:00:b3:68:40",
