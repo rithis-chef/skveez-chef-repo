@@ -15,7 +15,8 @@ server {
   client_max_body_size <%= @max_upload_size %>m;
 
   location / {
-    try_files /home/vyacheslav/maintenance.html @backend;
+    root /home/vyacheslav;
+    try_files /maintenance.html @backend;
   }
 
   location @backend {
