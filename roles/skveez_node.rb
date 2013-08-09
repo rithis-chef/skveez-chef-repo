@@ -4,7 +4,9 @@ run_list(
   "recipe[ubuntu]",
   "recipe[apt]",
   "recipe[vslinko]",
-  "recipe[ignis]"
+  "recipe[ignis]",
+  "recipe[tarsnap]",
+  "recipe[tarsnap::files]"
 )
 
 override_attributes(
