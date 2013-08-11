@@ -13,12 +13,12 @@ dependencies.each do |pkg|
   package pkg
 end
 
-tarsnap_archive_name = ::File.basename(node['tarsnap']['source_url'])
-tarsnap_archive_dir  = ::File.basename(node['tarsnap']['source_url'], ".tgz")
+tarsnap_archive_name = ::File.basename(node['skveez_tarsnap']['source_url'])
+tarsnap_archive_dir  = ::File.basename(node['skveez_tarsnap']['source_url'], ".tgz")
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{tarsnap_archive_name}" do
-  source   node['tarsnap']['source_url']
-  checksum node['tarsnap']['source_checksum']
+  source   node['skveez_tarsnap']['source_url']
+  checksum node['skveez_tarsnap']['source_checksum']
 end
 
 execute "Unpack tarsnap source distribution" do
@@ -42,16 +42,16 @@ bash "Build tarsnap client" do
 end
 
 tarsnap_keygen_cmd = <<-EOS 
-  echo "#{node['tarsnap']['account_password']}" | /usr/local/bin/tarsnap-keygen \
+  echo "#{node['skveez_tarsnap']['account_password']}" | /usr/local/bin/tarsnap-keygen \
     --keyfile /usr/local/etc/tarsnap.key \
-    --user #{node['tarsnap']['account_login']} \
+    --user #{node['skveez_tarsnap']['account_login']} \
     --machine #{node['fqdn']}
 EOS
 
 unless ::File.exists?("/usr/local/etc/tarsnap.key")
-  unless node['tarsnap']['machine_key'].nil?
+  unless node['skveez_tarsnap']['machine_key'].nil?
     file "/usr/local/etc/tarsnap.key" do
-      content node['tarsnap']['machine_key']
+      content node['skveez_tarsnap']['machine_key']
     end
   else
     execute "Generate keyfile for this machine" do
@@ -60,7 +60,7 @@ unless ::File.exists?("/usr/local/etc/tarsnap.key")
 
     ruby_block "Store tarsnap key in an attribute" do
       block do 
-        node.set['tarsnap']['machine_key'] = ::File.read("/usr/local/etc/tarsnap.key")
+        node.set['skveez_tarsnap']['machine_key'] = ::File.read("/usr/local/etc/tarsnap.key")
       end
     end
   end
@@ -75,7 +75,7 @@ template "/usr/local/etc/tarsnap.conf" do
   mode "0644"
 end
 
-[ node['tarsnap']['cache_dir'], node['tarsnap']['temp_dir'] ].each do |dir|
+[ node['skveez_tarsnap']['cache_dir'], node['skveez_tarsnap']['temp_dir'] ].each do |dir|
   directory dir do
     recursive true
   end

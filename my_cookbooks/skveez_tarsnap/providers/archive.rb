@@ -2,7 +2,7 @@ action :create do
   name_normalized = new_resource.name.downcase.tr(" ", "_")
 
   run_cmd = %Q{LANG=C #{new_resource.before_run} && /usr/local/bin/tarsnap -c -v -f #{name_normalized}_`date '+\\%Y-\\%m-\\%d_\\%H-\\%M'` #{new_resource.pathnames.join(" ")}}
-  run_cmd << %Q{ 2>&1 | mail -s "tarsnap report for `date '+\\%Y-\\%m-\\%d_\\%H-\\%M'` from `hostname`" #{node["tarsnap"]["mailto_reports"]}}
+  run_cmd << %Q{ 2>&1 | mail -s "tarsnap report for `date '+\\%Y-\\%m-\\%d_\\%H-\\%M'` from `hostname`" #{node["skveez_tarsnap"]["mailto_reports"]}}
 
   cron "tarsnap #{new_resource.name}" do
     minute  new_resource.minute 
@@ -12,7 +12,7 @@ action :create do
     weekday new_resource.weekday
     
     action :create
-    mailto node["tarsnap"]["mailto_reports"]
+    mailto node["skveez_tarsnap"]["mailto_reports"]
 
     command run_cmd
   end
@@ -27,7 +27,7 @@ action :create do
     weekday "*"
 
     action :create
-    mailto node["tarsnap"]["mailto_reports"]
+    mailto node["skveez_tarsnap"]["mailto_reports"]
 
     command cleanup_cmd
   end

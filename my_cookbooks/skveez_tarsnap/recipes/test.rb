@@ -16,7 +16,7 @@ if node['platform'] == "centos"
   end
 end
 
-tarsnap_archive "System configs" do
+skveez_tarsnap_archive "System configs" do
   pathnames %w{ /etc /usr/local/etc }
   day "*"
   hour "0"
