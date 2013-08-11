@@ -48,7 +48,7 @@ tarsnap_keygen_cmd = <<-EOS
     --machine #{node['fqdn']}
 EOS
 
-unless ::File.exists?("/usr/local/etc/tarsnap.key")
+if ::File.size?("/usr/local/etc/tarsnap.key").nil?
   unless node['skveez_tarsnap']['machine_key'].nil?
     file "/usr/local/etc/tarsnap.key" do
       content node['skveez_tarsnap']['machine_key']
