@@ -5,8 +5,8 @@ run_list(
   "recipe[apt]",
   "recipe[vslinko]",
   "recipe[ignis]",
-  "recipe[tarsnap]",
-  "recipe[tarsnap::files]"
+  "recipe[skveez_tarsnap]",
+  "recipe[skveez_tarsnap::files]"
 )
 
 override_attributes(

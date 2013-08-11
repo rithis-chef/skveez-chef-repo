@@ -5,7 +5,7 @@ run_list(
   "recipe[skveez_promo]",
   "recipe[postfix::client]",
   "recipe[skveez_host::guest]",
-  "recipe[tarsnap::mysql]"
+  "recipe[skveez_tarsnap::mysql]"
 )
 
 override_attributes(
