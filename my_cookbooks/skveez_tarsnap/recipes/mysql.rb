@@ -45,7 +45,7 @@ skveez_tarsnap_archive "MySQL full backup" do
 end
 
 skveez_tarsnap_archive "MySQL incremental backup" do
-  pathnames  [ "#{node['skveez_tarsnap']['temp_dir']}/mysql/incr" ]
+  pathnames  [ "#{node['skveez_tarsnap']['temp_dir']}/mysql/incr/`date '+Y-%m-%d'`_*" ]
   before_run "/usr/local/bin/mysql_backup_incremental"
 
   minute  node['skveez_tarsnap']['backup_mysql_incremental']['schedule'].split[0]
