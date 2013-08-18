@@ -1,4 +1,4 @@
 source :rubygems
 
-gem "chef"
+gem "chef", "~>10"
 gem "librarian"
